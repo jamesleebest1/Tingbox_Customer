@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Supermarket - Siêu thị hiện đại</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="background-overlay"></div>
+
+    <!-- Header -->
+    <header class="header glass-container">
+      <div class="nav-container">
+        <div class="logo">🛒 Modern Supermarket</div>
+        <div class="cart-info">
+          <div class="cart-badge" onclick="showCart()">
+            <span style="font-size: 24px">🛍️</span>
+            <div class="cart-count" id="cartCount">0</div>
+          </div>
+          <div>
+            <div>Giỏ hàng</div>
+            <div id="cartTotal" style="font-weight: 700">0đ</div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="progress-container">
+      <div class="progress-bar glass-container">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-steps">
+        <div class="step active" data-step="1">
+          <div class="step-bullet">1</div>
+          <div class="step-label">Chọn sản phẩm</div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-bullet">2</div>
+          <div class="step-label">Thông tin giao hàng</div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-bullet">3</div>
+          <div class="step-label">Hoàn tất đơn hàng</div>
+        </div>
+      </div>
+    </div>
+    <!-- Hero Banner -->
+    <section class="hero-section">
+      <div class="hero-content glass-container">
+        <h1>🛒 Siêu thị hiện đại</h1>
+        <p>Mua sắm tiện lợi - Giao hàng nhanh chóng</p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">2000+</span>
+            <span class="stat-label">Sản phẩm</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Phục vụ</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">30 phút</span>
+            <span class="stat-label">Giao hàng</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories-section">
+      <h2 class="section-title">🏷️ Danh mục sản phẩm</h2>
+      <div class="categories-grid">
+        <div class="category-card glass-container">
+          <div class="category-icon">🥬</div>
+          <div class="category-name">Rau củ quả</div>
+        </div>
+        <div class="category-card glass-container">
+          <div class="category-icon">🥩</div>
+          <div class="category-name">Thịt cá</div>
+        </div>
+        <div class="category-card glass-container">
+          <div class="category-icon">🥛</div>
+          <div class="category-name">Sữa & trứng</div>
+        </div>
+        <div class="category-card glass-container">
+          <div class="category-icon">🍞</div>
+          <div class="category-name">Bánh kẹo</div>
+        </div>
+        <div class="category-card glass-container">
+          <div class="category-icon">☕</div>
+          <div class="category-name">Đồ uống</div>
+        </div>
+        <div class="category-card glass-container">
+          <div class="category-icon">🧴</div>
+          <div class="category-name">Gia dụng</div>
+        </div>
+      </div>
+    </section>
+    <div class="main-container">
+      <!-- Trang sản phẩm -->
+      <div id="productPage" class="page active">
+        <div class="products-grid" id="productsGrid"></div>
+        <div class="checkout-section glass-container">
+          <button class="checkout-btn" onclick="proceedToCheckout()">
+            🚀 Tiến hành đặt hàng (<span id="totalItems">0</span> sản phẩm)
+          </button>
+        </div>
+      </div>
+
+      <!-- Trang thông tin giao hàng -->
+      <div id="shippingPage" class="page">
+        <button class="back-button" onclick="goBack('productPage')">←</button>
+        <div
+          class="glass-container fade-in"
+          style="max-width: 600px; margin: 0 auto; padding: 30px"
+        >
+          <h2
+            style="
+              text-align: center;
+              margin-bottom: 30px;
+              color: #ffffff;
+              font-size: 24px;
+            "
+          >
+            📦 Thông tin giao hàng
+          </h2>
+          <form id="shippingForm">
+            <div class="form-group">
+              <label class="form-label">Họ và tên người nhận</label>
+              <input type="text" class="form-input" id="fullName" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Số điện thoại</label>
+              <input type="tel" class="form-input" id="phoneNumber" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Địa chỉ giao hàng</label>
+              <input type="text" class="form-input" id="address" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phương thức thanh toán</label>
+              <select class="form-select" id="paymentMethod" required>
+                <option value="">Chọn phương thức thanh toán</option>
+                <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                <option value="bank">Chuyển khoản ngân hàng</option>
+                <option value="card">Thẻ tín dụng</option>
+                <option value="momo">Ví MoMo</option>
+              </select>
+            </div>
+            <div style="text-align: center; margin-top: 30px">
+              <button
+                type="button"
+                class="btn-secondary"
+                onclick="goBack('productPage')"
+              >
+                ← Quay lại
+              </button>
+              <button type="submit" class="btn-primary">
+                Xác nhận giao hàng →
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Trang hóa đơn -->
+      <div id="invoicePage" class="page">
+        <button class="back-button" onclick="goBack('shippingPage')">←</button>
+        <div class="glass-container invoice fade-in">
+          <div class="invoice-header">
+            <div class="invoice-title">🧾 HÓA ĐƠN ĐIỆN TỬ</div>
+            <div class="invoice-number" id="invoiceNumber"></div>
+          </div>
+
+          <div class="invoice-details" id="invoiceDetails"></div>
+
+          <div class="invoice-items" id="invoiceItems"></div>
+
+          <div class="invoice-total">
+            <div class="total-amount" id="invoiceTotal"></div>
+          </div>
+          <div class="tracking-code">
+            <div class="tracking-label">MÃ VẬN ĐƠN</div>
+            <div class="tracking-number" id="trackingNumber"></div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn-primary" onclick="downloadInvoice()">
+              📄 Tải hóa đơn
+            </button>
+            <button class="btn-secondary" onclick="backToShopping()">
+              🛒 Mua hàng tiếp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal xác nhận -->
+    <div id="confirmModal" class="modal">
+      <div class="modal-content glass-container">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="modalContent"></div>
+        <div style="text-align: center; margin-top: 20px">
+          <button class="btn-secondary" onclick="closeModal()">Hủy</button>
+          <button class="btn-primary" id="confirmBtn">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.0/firebase-app-compat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.0/firebase-database-compat.min.js"></script>
+    <script src="script/index.js"></script>
+  </body>
+</html>
